@@ -36,8 +36,8 @@ public class JwtTokenProvider {
     public String createToken(User userDetails) {
         Claims claims = Jwts.claims().setSubject(userDetails.getEmail());
         claims.put("email", userDetails.getEmail());
-        claims.put("role", "student");
-        claims.put("customerId", userDetails.getCustomerId());
+        claims.put("role", userDetails.getRole());
+        claims.put("userId", userDetails.getId());
         claims.put("secretKey", userDetails.getUuid());
         Date now = new Date();
         Instant currentInstant = Instant.now();

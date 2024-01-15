@@ -10,17 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserVM {
 
-    private String id;
-
     private String email;
 
     private String password;
-
-    private String givenName;
-
-    private String familyName;
-
-    private String role;
 
     private PrimaryDetails primaryDetails;
 }

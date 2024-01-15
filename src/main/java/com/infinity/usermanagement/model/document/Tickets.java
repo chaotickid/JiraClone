@@ -1,4 +1,4 @@
-package com.infinity.ticketmanagement.model.document;
+package com.infinity.usermanagement.model.document;
 
 import com.infinity.common.model.MetaData;
 import lombok.AllArgsConstructor;
@@ -11,21 +11,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Ticket {
-
+public class Tickets {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String assignedTo;
-
-    private String reportsTo;
-
-    private String subject;
-
-    private String message;
+    @ManyToOne
+    private User user;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private MetaData metaData;
-
 }

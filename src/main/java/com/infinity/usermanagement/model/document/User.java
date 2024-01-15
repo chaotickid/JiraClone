@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -18,12 +22,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String customerId;
-
-    private String givenName;
-
-    private String familyName;
-
+    @Email
     private String email;
 
     private String password;
@@ -44,7 +43,15 @@ public class User {
     private PrimaryDetails primaryDetails;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Organization organization;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private MetaData metaData;
 
+    @ManyToMany(mappedBy = "user")
+    private Set<Teams> teams = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tickets> ticket;
 
 }
