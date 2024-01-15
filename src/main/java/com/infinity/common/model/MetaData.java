@@ -20,11 +20,11 @@ public class MetaData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String createdBy = "system";
+    private String createdBy;
 
     private String createdAt;
 
-    private String updatedBy = "system";
+    private String updatedBy;
 
     private String updatedAt;
 

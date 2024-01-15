@@ -7,39 +7,31 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Tickets {
+public class ContactMedia {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String isPrimary;
+
+    private String countryCode;
+
+    private String primaryContact;
+
+    private String secondaryContact;
+
+    private String primaryEmailAddress;
+
+    private String secondaryEmailAddress;
+
     @ManyToOne
-    private User user;
-
-    private String ticketName;
-
-    private String description;
-
-    private String assignee;
-
-    private String reporter;
-
-    private String dueDate;
-
-    private String startDate;
-
-    private String comments;
-
-    private String priority;
-
-    @OneToOne
-    private TicketStatus ticketStatus;
-
-    @OneToOne
-    private TicketIssueType ticketIssueType;
+    private Organization organization;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private MetaData metaData;

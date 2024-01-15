@@ -11,36 +11,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Tickets {
+public class TicketStatus {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    private User user;
-
-    private String ticketName;
-
-    private String description;
-
-    private String assignee;
-
-    private String reporter;
-
-    private String dueDate;
-
-    private String startDate;
-
-    private String comments;
-
-    private String priority;
-
-    @OneToOne
-    private TicketStatus ticketStatus;
-
-    @OneToOne
-    private TicketIssueType ticketIssueType;
+    private String name;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private MetaData metaData;
+
 }

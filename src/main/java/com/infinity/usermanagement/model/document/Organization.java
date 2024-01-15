@@ -18,9 +18,25 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String name;
+
+    private String description;
+
+    private String website;
+
+    private String industryType;
+
+    private String logo;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<ContactMedia> contactMedia = new ArrayList<>();
+
+
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List <Projects> projects = new ArrayList<>();
-
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private MetaData metaData;
