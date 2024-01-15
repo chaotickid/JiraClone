@@ -1,6 +1,6 @@
 # Generic Service
 
-A generic backend boostrap applicaiton to quickly start enterprise level spring boot appliacation
+jira-clone backend
 
 
 
