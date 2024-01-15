@@ -29,6 +29,8 @@ public class User {
 
     private String role;
 
+    private String userName;
+
     private String uuid = UUID.randomUUID().toString();
 
     private String lastLoginAt;

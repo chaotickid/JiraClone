@@ -20,6 +20,8 @@ public class Projects {
 
     private String name;
 
+    private String description;
+
     private String status;
 
     private String owner;
