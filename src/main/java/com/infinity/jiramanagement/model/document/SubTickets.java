@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Tickets {
+public class SubTickets {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

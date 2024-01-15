@@ -5,7 +5,7 @@ import com.infinity.common.exceptionHandling.ErrorCodeEnum;
 import com.infinity.common.model.MetaData;
 import com.infinity.common.utils.JwtTokenProvider;
 import com.infinity.jiramanagement.config.UserConfigs;
-import com.infinity.jiramanagement.constants.UserRoles;
+import com.infinity.jiramanagement.constants.UserRolesEnum;
 import com.infinity.jiramanagement.model.document.User;
 import com.infinity.jiramanagement.model.view.JWTToken;
 import com.infinity.jiramanagement.model.view.UserVM;
@@ -71,7 +71,7 @@ public class UserService {
             user.setIsAccountVerified(String.valueOf(Boolean.TRUE));
             user.setIsEmailVerified(String.valueOf(Boolean.FALSE));
             user.setIsAccountLocked(String.valueOf(Boolean.FALSE));
-            user.setRole(String.valueOf(UserRoles.ADMIN));
+            user.setRole(String.valueOf(UserRolesEnum.ADMIN));
             MetaData metaData = new MetaData();
             metaData.setCreatedAt(String .valueOf(Instant.now()));
             metaData.setUpdatedAt(String .valueOf(Instant.now()));
@@ -99,20 +99,6 @@ public class UserService {
         }
         return fetchedUser.get();
     }
-
-//    public User getUserById(String customerId){
-//        Optional<User> fetchedUser = Optional.empty();
-//        if (StringUtils.isBlank(customerId)) {
-//            log.error("User not found");
-//            throw new CustomResponseException(ErrorCodeEnum.ER1006, HttpStatus.BAD_REQUEST);
-//        }
-//        fetchedUser = userRepository.findByCustomerId(userConfigs.getClassIdValue() + Constants.DOUBLE_COLON + customerId);
-//        if (fetchedUser.isEmpty()) {
-//            log.error("User not found with customer Id: {}", customerId);
-//            throw new CustomResponseException(ErrorCodeEnum.ER1003, HttpStatus.UNAUTHORIZED);
-//        }
-//        return fetchedUser.get();
-//    }
 
     public JWTToken getUserDetails(UserVM signInRequest) {
         Optional<User> fetchedUser = Optional.empty();

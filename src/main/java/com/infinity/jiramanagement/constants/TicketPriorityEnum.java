@@ -1,6 +1,6 @@
 package com.infinity.jiramanagement.constants;
 
-public enum TicketPriority {
+public enum TicketPriorityEnum {
     HIGH,
     LOW,
     MEDIUM
