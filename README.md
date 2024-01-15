@@ -25,7 +25,7 @@ jira-clone backend
 - clone the project
 
 ```bash
-  git clone https://github.com/chaotickid/GenericService.git
+  git clone https://github.com/chaotickid/jiraclone-mysql.git
 ```
 
 - install couchbase `https://dev.mysql.com/downloads/installer/`
@@ -36,7 +36,7 @@ jira-clone backend
 spring.datasource.username=root
 spring.datasource.password=root
 ```
-- start the server, and enjoy spring :)
+- as per configuration server will listen @9090 port, and enjoy spring :)
 
 ## 🚀 About Me
 I'm Adtya Patil working as J2EE develeoper in Bangalore
