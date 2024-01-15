@@ -2,7 +2,7 @@ package com.infinity.common.utils;
 
 import com.infinity.common.exceptionHandling.CustomResponseException;
 import com.infinity.common.exceptionHandling.ErrorCodeEnum;
-import com.infinity.usermanagement.model.document.User;
+import com.infinity.jiramanagement.model.document.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
