@@ -1,5 +1,6 @@
 package com.infinity.jiramanagement.model.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.infinity.common.model.MetaData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 public class User {
 

@@ -15,4 +15,5 @@ public class GlobalTokenVM {
     private double exp;
     private String role;
     private String customerId;
+    private String userId;
 }

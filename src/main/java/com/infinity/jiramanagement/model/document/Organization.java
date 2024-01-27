@@ -1,6 +1,7 @@
 package com.infinity.jiramanagement.model.document;
 
 import com.infinity.common.model.MetaData;
+import com.infinity.common.utils.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,4 +41,14 @@ public class Organization {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private MetaData metaData;
+
+    //*********** HELPER FUNCTIONS ***********
+    public void addProjectUnderOrganization(List<Projects> project) {
+        this.projects.addAll(project);
+        project.forEach(fetchedProjectFromList -> {
+            fetchedProjectFromList.setMetaData(Utils.createMetaData("PROJECT", null));
+            fetchedProjectFromList.setOrganization(this);
+        });
+    }
+
 }
