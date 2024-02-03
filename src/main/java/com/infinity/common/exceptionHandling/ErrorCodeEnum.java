@@ -14,6 +14,9 @@ public enum ErrorCodeEnum {
     ER1005("ER1005", "Invalid secret key, Authentication failed"),
     ER1006("ER1006", "Customer id is null blank"),
 
+
+    //organization
+    ER3001("ER3001", "Something went wrong during creation of organization"),
     //order-management [ER3000-ER4999]
 
 

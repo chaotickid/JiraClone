@@ -23,6 +23,8 @@ public class ExceptionResponse {
 
     private String timeStamp;
 
+    private String debugErrorMessage;
+
     private String traceId;
 
     private String spanId;

@@ -2,6 +2,8 @@ package com.infinity.jiramanagement.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infinity.common.exceptionHandling.CustomResponseException;
+import com.infinity.common.exceptionHandling.ErrorCodeEnum;
 import com.infinity.common.utils.CommonMappingUtils;
 import com.infinity.common.utils.Utils;
 import com.infinity.jiramanagement.model.document.Organization;
@@ -10,6 +12,7 @@ import com.infinity.jiramanagement.repository.OrganizationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -41,7 +44,7 @@ public class OrganizationService {
             log.debug("Organization created successfully with details: {}", objectMapper.writeValueAsString(organization));
         } catch (Exception e) {
             log.error("Exception captured while creating organization");
-            //throw custom exception
+            throw new CustomResponseException(ErrorCodeEnum.ER3001, HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
         return CommonMappingUtils.organizationToOrganizationVM(organization, modelMapper);
     }

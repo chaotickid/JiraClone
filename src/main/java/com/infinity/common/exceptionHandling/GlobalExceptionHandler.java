@@ -19,7 +19,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                             WebRequest request) {
         log.error("Internal server error.", ex);
         ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getErrorCode(), ex.getError(), String.valueOf(ex.getHttpStatus()),
-                ex.getHref(), ex.getMethodType(), ex.getTimeStamp(), ex.getTraceId(), ex.getSpanId());
+                ex.getHref(), ex.getMethodType(), ex.getTimeStamp(), ex.getDebugErrorMessage(), ex.getTraceId(), ex.getSpanId());
         exceptionResponse.setError(ex.getError());
         return new ResponseEntity<>(exceptionResponse,
                 ex.getHttpStatus());
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<Object> handleAllExceptions(Exception ex,
                                                             WebRequest request) {
         log.error("Internal server error.", ex);
-        return new ResponseEntity<>("",
+        return new ResponseEntity<>(ex,
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

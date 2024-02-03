@@ -24,9 +24,27 @@ public class CustomResponseException extends ResponseStatusException {
 
     private String timeStamp;
 
+    private String debugErrorMessage;
+
     private String traceId;
 
     private String spanId;
+
+    public CustomResponseException(ErrorCodeEnum errorCodeEnum,
+                                   HttpStatus httpStatus, Exception exception){
+        super(httpStatus, errorCodeEnum.getError());
+        HttpServletRequest request =
+                ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+                        .getRequest();
+        this.errorCode = errorCodeEnum.getErrorCode();
+        this.error =  errorCodeEnum.getError();
+        this.httpStatus = httpStatus;
+        this.debugErrorMessage = errorCodeEnum.getError() + ", Reason: " + exception.getMessage();
+        this.href = request.getRequestURI();
+        this.methodType = request.getMethod();
+        this.timeStamp = String.valueOf(Instant.now());
+
+    }
 
     public CustomResponseException(ErrorCodeEnum errorCodeEnum,
                                    HttpStatus httpStatus){

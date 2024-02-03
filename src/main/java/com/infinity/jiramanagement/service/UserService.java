@@ -81,7 +81,7 @@ public class UserService {
             userRepository.save(user);
         } catch (Exception e) {
             log.error("Unable to create a user. Reason: {}", e.getMessage());
-            throw new CustomResponseException(ErrorCodeEnum.ER1000, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomResponseException(ErrorCodeEnum.ER1000, HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
         return user;
     }
@@ -122,7 +122,7 @@ public class UserService {
             log.debug("Updated user values in the database successfully");
         } catch (Exception e) {
             log.error("Exception occurred while fetching user, Reason: {}", e.getMessage());
-            throw new CustomResponseException(ErrorCodeEnum.ER1004, HttpStatus.UNAUTHORIZED);
+            throw new CustomResponseException(ErrorCodeEnum.ER1004, HttpStatus.UNAUTHORIZED, e);
         }
         JWTToken newJwtToken = new JWTToken();
         newJwtToken.setIdToken(jwtTokenProvider.createToken(fetchedUser.get()));
