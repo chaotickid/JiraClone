@@ -17,6 +17,7 @@ public enum ErrorCodeEnum {
 
     //organization
     ER3001("ER3001", "Something went wrong during creation of organization"),
+    ER3002("ER3002", "Something went wrong during get all organization"),
     //order-management [ER3000-ER4999]
 
 
