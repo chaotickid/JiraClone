@@ -3,7 +3,9 @@ package com.infinity.jiramanagement.service;
 import com.infinity.common.exceptionHandling.CustomResponseException;
 import com.infinity.common.exceptionHandling.ErrorCodeEnum;
 import com.infinity.common.model.MetaData;
+import com.infinity.common.utils.CommonMappingUtils;
 import com.infinity.common.utils.JwtTokenProvider;
+import com.infinity.common.utils.Utils;
 import com.infinity.jiramanagement.config.UserConfigs;
 import com.infinity.jiramanagement.constants.UserRolesEnum;
 import com.infinity.jiramanagement.model.document.User;
@@ -12,6 +14,7 @@ import com.infinity.jiramanagement.model.view.UserVM;
 import com.infinity.jiramanagement.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
@@ -47,6 +50,9 @@ public class UserService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     /***
      * This method used to create user
      *
@@ -63,21 +69,16 @@ public class UserService {
             log.error("User is already present with same email id: {}", signUpRequest.getEmail());
             throw new CustomResponseException(ErrorCodeEnum.ER1001, HttpStatus.CONFLICT);
         }
-        User user = new User();
+        User user = null;
         try {
-            user.setEmail(signUpRequest.getEmail());
-            user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+            user = CommonMappingUtils.userVMToUser(signUpRequest, modelMapper);
             user.setLastLoginAt(String.valueOf(Instant.now()));
             user.setIsAccountVerified(String.valueOf(Boolean.TRUE));
             user.setIsEmailVerified(String.valueOf(Boolean.FALSE));
             user.setIsAccountLocked(String.valueOf(Boolean.FALSE));
             user.setRole(String.valueOf(UserRolesEnum.ADMIN));
-            MetaData metaData = new MetaData();
-            metaData.setCreatedAt(String .valueOf(Instant.now()));
-            metaData.setUpdatedAt(String .valueOf(Instant.now()));
-            user.setMetaData(metaData);
-            user.setPrimaryDetails(signUpRequest.getPrimaryDetails());
-            log.debug("Finalized used details: {}", user);
+            //meta data
+            user.setMetaData(Utils.createMetaData("USER", null));
             userRepository.save(user);
         } catch (Exception e) {
             log.error("Unable to create a user. Reason: {}", e.getMessage());

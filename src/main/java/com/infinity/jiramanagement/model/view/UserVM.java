@@ -18,5 +18,8 @@ public class UserVM {
     @NotBlank
     private String password;
 
+    @NotBlank
+    private String userName;
+
     private PrimaryDetails primaryDetails;
 }
